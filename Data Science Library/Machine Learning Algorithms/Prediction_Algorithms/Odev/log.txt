@@ -1,0 +1,34 @@
+Tek Parametreli Olarak(UnvanSeviyesi);
+
+Linear Reg:
+R-squared (uncentered):                   0.942
+
+Polynomial Reg:
+R-squared (uncentered):                   0.942
+
+Support Vector Reg:
+R-squared (uncentered):                   0.722
+
+Decision Tree:
+R-squared (uncentered):                   0.751
+
+Random Forest:
+R-squared (uncentered):                   0.719
+
+
+Cok Parametreli Olarak(UnvanSeviyesi, Kidem, Puan)
+
+Linear Reg:
+R-squared (uncentered):                   0.903
+
+Polynomial Reg:
+R-squared (uncentered):                   0.903
+
+Support Vector Reg:
+R-squared (uncentered):                   0.782
+
+Decision Tree:
+R-squared (uncentered):                   0.679
+
+Random Forest:
+R-squared (uncentered):                   0.713

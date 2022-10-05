@@ -1,0 +1,152 @@
+******************************************************************Association Rule Mining******************************************************************
+
+	Olaylarin birlikte gerceklesme durumlarini cozumleyen veri madenciligi yontemlerine Association Rule Mining(Birliktelik Kural Cikarimi) denir.
+Association Rule, gecmis verilerin analiz edilerek bu veriler icindeki birliktelik davranislarinin tespiti ile gelecege yonelik calismalar yapilmasini
+destekleyen bir yaklasimdir.
+	Association Rule uygulamasina Pazar Sepeti analizi ornek verilebilir. Association Rule'de ki amac, alisveris esnasinda musterilerin satin aldiklari
+urunler arasindaki birliktelik iliskisini bulmak, bu iliski verisi dogrultusunda musterilerin satin alma aliskanliklarini tespit etmektir.
+Satıcılar, keşfedilen bu birliktelik bağıntıları ve alışkanlıklar sayesi ile etkili ve kazançlı pazarlama ve satış imkanına sahip olmaktadırlar.
+
+Bunu alanlar bunu da aldi
+
+Bunu izleyenler bunu da izledi
+
+Bunu ....'lar bunu da ....
+
+yapisina sahiptir.
+
+
+Association Rule'da bazi kavramlar vardir. Bunlar:
+
+Support(Destek) = a varligini iceren eylemler / Toplam eylem sayisi   -   x ve y urunlerini alan kisi sayisi / toplam kisi sayisi
+
+
+Confidence(Guven) = a ve b varligini iceren eylemler / a varligini iceren eylemler    -    x ve y urunlerini alan kisi sayisi / x urununu alan kisi sayisi
+
+
+Lift(Kaldirac) = Confidence(a->b) / Support(b)   -   a eyleminin b eylemine etkisi nedir? ne kadar yukari cikartabilir?
+
+
+*************************************************************Apriori Algorithm************************************************************
+
+	Apriori Algoritmasinin ismi, bilgileri bir onceki adimdan elde ettigi icin Prior(Onceki) anlamindan gelmektedir. Bu algoritma temelinde
+iteratif(tekrarlayan) bir nitelige sahiptir ve hareket bilgileri iceren veri tabanlarinda sik gecen oge kumelerinin kesfedilmesinde kullanilir.
+
+	Association Rule Mining, tum sik gecen ogelerin bulunmasi ve sik gecen bu ogelerden guclu Association Rule uretilmesi olmak uzere iki asamalidir.
+Association Rule, ilk asamasi icin kullanilan Apriori Algorithm, sik gecen ogeler madenciliginde kullanilan en populer ve klasik algoritmalardir. Bu algoritmada
+ozellikler ve veri, 'boolean' iliski kurali ile degerlendirilir.
+
+Algoritma uygulanirken, oncelikle veriler boolean ture yani 1 ve 0'a donusturulur.
+Her bir urunden kac tane satildigi cikartirilir.
+Frekans(urunun tekrar sayisi), Support ve Minimum Support(Kendimiz Belirleriz) degeri hesaplanir.
+Support = Frekans(Urunun satin alma sayisi) / Toplam Girdi(Fis sayisi)  0-1 arasinda deger alir.
+Minimum Support Degerini gecen urunlerle yeni bir tablo olustururuz.
+
+Minimim Support Degerini hesaplamak istersek;
+Kendi belirledigimiz degeri %'lik olarak alip, Toplam Girdi sayisi ile carpariz. Frekans'i bu degerden dusuk olan verileri yeni olusacak tablolara eklemeyiz.
+Ornegin;
+Min Sup Degerini %40(0.4) olarak belirleyelim. Toplam Girdide 7 olsun.
+7 * 0.4 = 2.8
+2.8'den daha dusuk frekansa sahip urunleri bir sonraki tablolara almayacagiz.
+
+Min Sup Degerini gecen urunleri de birlikte satilmalarina gore tekrar frekanslarini buluyoruz.
+Min Sup Degerini gecemeyenleri eliyoruz.
+Boyle ilerleyerek En Fazla kac tane Birliktelik Olusabildigine bakiyoruz.
+En son olusturdugumuz birliktelikler Min Sup Degerinin altinda kaliyorsa orda birakiyoruz.
+Sonra da;
+1. Confidence (Güven)
+2. Lift (İlginçlik)
+3. Conviction
+4. Leverage
+5. Coverage
+
+degerleri hesapliyoruz.
+
+Sonuc Olarak;
+
+	Apriori Algoritmasi, verilerimizin uzerinden istatistiksel yontemler ile tahmin edilemeyen cikarimlar yapabilir ve bu sayede ileriye donuk analizler
+yapmak veya kararlar almak mumkun olur.
+
+
+
+************************************************ECLAT(Equivalence Class Transformation) Algorithm**************************************************
+
+Eclat(Esdegerlik Sinif Donusumu) Algoritmasinin Apriori Algoritmasindan en buyuk farki;
+
+Apriori -> Breadth First Search(Ilk Satirdaki islerini bitirmeden 2. Satira gecmez. Bu sekilde calisir.)
+Eclat -> Dept First Search(Istedigi kadar derine inebilen seklinde calisir.)
+
+Eclat, Apriori Algoritmasina benzer calisir. Apriori Algoritmasindan eleman(Alisveris Sepetindeki urun 1,2,3 vb.) bazli islem yapilir ancak Eclat Algoritmasinda
+ise elemanlarin gectigi transaction(Alisveris Sepeti 100, 200 vb.) baz alinir.
+
+Apriori'de her bir urunun Frekanslarina bakilirdi. Min Support degerinin altinda kalan urunler elenirdi.
+Eclat Algoritmasinda ise urunlerin hangi fis'lerde gectigine bakiyoruz. Ornegin x urunu, a, b ve c fislerinde gecmis. Tabloyu da fislere gore yapar.
+
+
+Bir diger Birliktelik Kural Algoritmasi da Fp Growth Algoritmasi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

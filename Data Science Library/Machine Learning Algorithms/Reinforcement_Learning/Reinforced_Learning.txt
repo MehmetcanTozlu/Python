@@ -1,0 +1,131 @@
+*******************************************************************Reinforcement Learning*****************************************************************
+
+	Reinforcement(Pekistirmeli) Learning, Machine Learning'in alt kollarindan biridir. ML'de genellikle Markov Karar Sureci adi verilen bir model
+kullaniliyor. Bu model Yapay Zeka'nin onceden bilgilendirilmesine ve yonlendirilmesine dayali. Kesin bir neden-sonuc iliskisi var. Pekistirmeli Ogrenme
+sureciyse on bilgi yerine Gozlem ve Secimde Bulunmak uzerine kurulu. Neden-Sonuc iliskisinin nasil kuruldugu bilgisi Yapay Zeka'ya verilmiyor (ya da cok az
+veriliyor), Yapay Zeka kendisi ogreniyor.
+	Bu sistemin ozelligi, yapay zekayi bir sonuca kosullandirmasi. Bu sonuc her zaman en yuksek odul degerinde. Daha az, daha farkli bir odul ya da hic
+odul alamamasi Yapay Zeka icin bir ceza olarak goruluyor. Dolayisiyla Yapay Zeka'nin motivasyonunun her zaman tek yonde isledigi soylenebilir.
+
+Sistem Nasil Calisiyor?
+
+Adim-1:
+	Yapay Zeka icinde bulundugu sistem hakkindaki bilgisi yetersiz old. icin Neden-Sonuc arasinda bag kurmak amaciyla gozlem yapiyor.
+
+Adim-2:
+	Gozlemin ardindan Yapay Zeka onundeki secenekler arasinda bir tercihte bulunmaya zorlaniyor. En yuksek odule Gudulu old. icin, o odule en uygun olacak
+	sekilde bir karar vererek harekete geciyor.
+
+Adim-3:
+	Ilk Adimdan sonra Yapay Zeka tekrar gozlemde bulunarak onune cikan yeni seceneklere(ortama) bakiyor. Burada onemli olan nokta, Yapay Zeka'nin ilk
+	adimdan sonra hedefine ulasma konusunda nasil dogru karar alabilecegini ogrenmis olmasi. Yani yapay zekanin sistem icindeki her adimi bir tur birikim
+	demek
+
+
+
+						     |--->--->--->--->--->-- Action ->-->--->-->--->--->---|
+						     ^					    		   *
+						     |					    		   |
+						Agent(Ajan)			    		  Environment(Ortam)
+						     |							   |
+						     ^							   *
+						     |-<---<--- Observation(Gozlem), Reward(Odul) -<---<---|
+
+
+
+
+	Reinforcement Learning'de, hedeflerden birisi, Yapay Zeka icin varilacak hedefin mesafesinin SONSUZA YAKIN olmasi. Yani bir nevi ufkun ucunda gorulen
+hedefe surekli ilerlese de hedefin hic yaklasmamasi gibi bir kosulun yaratilmak istenmesi soz konusu.
+	Bu modellemede her sey yukaridaki 3 Adim'dan ibaret gozukse de sistemi geregi Yapay Zeka'nin sonsuza yakin bir hedef-gozlem-harekete gecme-yeniden gozlem
+dongusune girmesi onemli.
+
+
+Peki bu sistemin handikaplari hic mi yok?
+
+En buyuk eksiklerden biri, bu sekilde calisan sistemin cok fazla islemci gucu ve bellek kullanilmasinin gerekiyor olusu. Bu da bilgisayar kapasitesi ve elektrik
+tuketimi demek oluyor. Bunun disinda isin muhendisligiyle ilgili teorik engeller de mevcut.
+
+
+
+******************************************Upper Confidence Bound(Ust Guven Araligi) - UCB******************************************
+
+
+UCB'nin mantigi aslinda Reinforcement Learning'in mantigina buna dayaniyor;
+
+- Kullanici her seferinde bir eylem yapar(event - e)
+- Bu eylem karsiliginda bir skor doner(ornegin web tiklamasi 1 ve tiklanmamasi 0)
+- Amac tiklamalari maksimuma cikarmak
+
+
+Upper Confidence Bound icin 3 adim uygulamaliyiz. Bunlar:
+
+Adim-1:
+    Her turda(tur sayisi n olsun), he reklam/ilan alternatifi(i icin) asagidaki sayilar tutulur
+        Ni(n): i sayili reklamin o ana kadar ki tiklanma sayisi
+        Ri(n): o ana kadar ki i reklamindan gelen toplam odul
+Adim-2:
+    Yukaridaki bu iki sayidan, asagidaki degerler hesaplanir
+        O ana kadar ki her reklamin/ilanin ortalama odulu -> Ri(n) / Ni(n)
+        Guven araligi icin asagi ve yukari oynama potansiyeli -> di(n) sqrt( (3/2) * (log(n) / Ni(n)) )
+Adim-3:
+    En yuksek UCB degerine sahip olani aliriz.
+
+
+*******************************************Thompson Sampling(Thompson Orneklemesi)**************************************************
+
+Thompson Sampling icin 3 adim uygulamaliyiz. Bunlar:
+
+Adim-1:
+    Her bir aksiyon icin asagidaki 2 sayiyi hesaplamaliyiz.
+        Ni1(n): o ana kadar odul olarak 1 gelmesi sayisi
+        Ni0(n): o ana kadar odul olarak 0 gelmesi sayisi
+Adim-2:
+    Her ilan icin asagida verilen Beta dagiliminda bir rastgele sayi uretiyoruz.
+        Teta = T
+	Beta = B
+	
+	Ti(n) = B(Ni^1(n) + 1, Ni^0(n) + 1)
+Adim-3:
+    En yuksek Beta degerine sahip olani aliriz.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

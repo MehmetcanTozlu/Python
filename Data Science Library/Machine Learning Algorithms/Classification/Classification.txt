@@ -1,0 +1,299 @@
+***********************************************************************CLASSIFICATION******************************************************************
+
+			Veri
+			  |
+			  |
+		 -------------------
+		 |	       	   |
+		 |	           |
+	     Categoric	        Numeric
+		 |		   |
+		 |		   |
+		 |-> Nominal	   |-> Ratio
+		 |		   |
+		 |-> Ordinal	   |-> Interval
+
+
+
+	Classification, kisaca sayisal olmayan verilerin tahmin edilmesidir.
+
+	Numeric olan verilerin tahminine Regression, Categoric olan verilerin tahminine Classification olarak siniflandiriyoruz.
+
+
+*******************************************************Logistic Regression**************************************************
+
+fi(t) = e^t / (e^t + 1)  =  1 / (1 - e^(-t))
+
+t = B0 + B1*x  t = A+B*x
+
+p(x) = 1 / (1 + e^-(B0+B1*x))
+
+B0 + B1*x1 + B2*x2 + ..... + Bm*xm =  B0 + i=1'den m'e kadar Bi*xi'lerin toplami
+
+
+B degeri ne kadar yuksek olursa fonksiyon da o kadar koseli sigmoid haline gelir.
+B degeri ne kadar dusuk olursa o kadar dogru'ya yakin bir hale gelir.
+
+	Logistic Regression, bagimli degiskenin Categoric bir degisken old. regresyon problemi gibidir. Dogrusal siniflandirma problemlerinde yaygin bir
+bicimde kullanilir. Regression denilmesine ragmen burada bir siniflandirma soz konusudur.
+Sonuc, ikili bir degiskenle olculur(yalnizca iki olasi sonuc vardir).
+1 -> Dogru, Hamile, Basarili
+0 -> Yanlis, Hamile Degil, Basarisiz
+
+Logistic Regression;
+- Bagimli degiskenle bagimsiz degisken arasinda dogrusal bir iliski varsaymaz, ancak aciklayici degiskenlerin logitleri ile yanit arasindaki dogrusal iliskiyi
+varsayar.
+- Varyans homojenliginin tatmin olmasi gerekmez.
+- Hatalarin bagimsiz olmasi gerekir, ancak normal dagilmaz.
+- Parametreleri tahmin etmek icin siradan En Kucuk Kareler(OLS) yerine Maksimum Olasilik Tahmini(MLE) kullanir ve bu nedenle buyuk orneklem yaklasimlarina
+dayanir.
+- Uygunluk iyiligi olcutleri; sezgisel kuralin hucre sayimlarinin %20'sinden azinin 5'in altinda olmadigi yeterince buyuk orneklere dayanir.
+
+	Logistic Regression, bagimli degisken ikili(binary) old. yurutulecek uygun regression analizidir. Tum Regression analizlerinde old. gibi,
+Logistic Regression'da bir tahmini analizdir. Logistic Regression, veriyi tanimlamak ve bir bagimli ikili degisken ile bir veya daha fazla nominal, sira arasi,
+aralik veya oran seviyesinde bagimsiz degiskenler arasindaki iliskiyi aciklamak icin kullanilir.
+
+Logistic Regression'un inceleyebilecegi promlem turu;
+- Akciger kanseri olma ihtimali(evet veya hayir), kilo ve gunde icilen her paket sigara icin nasil degisir?
+- Vucut agirligi kalori alimi, yag alimi ve katilimci yasi kalp krizi uzerine etkiye sahip mi(evet veya hayir)?
+
+
+*******************************************************Confsuion Matrix**************************************************
+
+	Bir Hata Matrisi de olarak bilinen Confusion Matrix, tipik olarak denetimli bir ogrenme algoritmasi olan bir algoritmanin performansinin
+gorsellestirilmesine izin veren ozel bir tablo duzenidir.
+
+
+		    			  Tahmin Edilen
+
+	      			      C+	      	C-	  Toplam
+
+		  	 C+	      TP     		FN          N+      Gercek Pozitif Sayisi
+      	    Gercek
+		    	 C-	      FP		TN	    N-      Gercek Negatig Sayisi
+
+			Toplam	      N+		N-	    N       Toplam Ornek Sayisi
+
+				    Tahmin	      Tahmin		    
+				Pozitif Sayisi	  Negatif Sayisi
+
+
+TP -> Dogru demisiz dogru cikmis.
+FN -> Yanlis demisiz dogru cikmis.
+FP -> Dogru demisiz yanlis cikmis.
+TN -> Yanlis demisiz yanlis cikmis.
+
+Ornek vermek gerekirse;
+Bir Kanser Teshisi koymak isteyelim.
+TP -> Kisiyi kanser teshisi koyduk ve kisi gercekten kanser cikti.
+FN -> Kisiye kanser teshisi koymadik ancak kisi kanser cikti.
+FP -> Kisiye kanser teshisi koyduk ancak kisi kanser cikmadi.
+FN -> Kisiye kanser teshisi koymadik ve kisi gercekten kanser cikmadi.
+
+
+True Positive(TP) = Bunlar gercek degeri 1 olarak tahmin edip ve gercek degerin 1 oldugu durumlardir.
+
+True Negative(TN) = Bunlar gercek degeri 0 olarak tahmin edip ve gercek degerin 0 oldugu durumlardir.
+
+False Positive(FP) = Bunlar gercek degeri 0 olan ancak tahmin ettigimiz deger 1 olan durumlardir.
+
+False Negative(FN) = Bunlar gercek degeri 1 olan ancak tahmin ettigimiz deger 0 olan durumlardir.
+
+Gercek Positives = TP + FN
+
+Gercek Negatives = TN + FN
+
+
+
+Accuracy(Dogruluk) Ratio = Genel olarak, siniflayicinin ne siklikla dogru tahmin ettiginin bir olcusudur.
+
+						(TP + TN) / N
+
+Misclassification(Yanlis Siniflandirma) Ratio = Siniflayicinin ne siklikla yanlis tahmin ettiginin bir olcusudur. Error Ratio olarakta bilinir.
+
+						(FP + FN) / N
+
+Precision(Hassasiyet) = Tum siniflardan, dogru olarak ne kadar tahmin edildiginin bir olcusudur. Mumkun old. kadar yuksek olmalidir. Positive Predictive Value
+olarakta bilinir.
+						TP / (TP + FP)
+
+Recall, Sensitivity, Hit Rate(3'ude kullanilir) = Siniflayicinin ne kadar gercek pozitif degeri(True Positive Rate) dogru tahmin ettiginin bir olcusudur.
+Hatirlatma, Hassasiyet veya Isabet Orani olarakda bilinir. 
+			
+		True Positive Rate -> Gercekte Yes ise kaci dogru siniflandirilmis?(Recall veya Sensitivity)
+
+						TP / TP + FN
+
+False Positive Rate(Fall-Out) = Receiver Operating Characteristic (ROC) grafiği çizimi ve Area Under Curve (AUC) hesaplamada kullanılır.
+
+		False Positive Rate -> Gercekte No ise bu sonuclarin kaci dogru?
+
+						FP / FP + TN
+
+Specificity(Ozgulluk) = Gercek degeri negatif olup negatif siniflandirilan sayisinin, gercek degeri negatif olanlarin tumune oranidir.
+
+						TN / TN + FP
+
+Prevalence(Yayginlik) = Tahminleme sonunda ne siklikla 1 degerinin bulundugunun olcusudur. 1 ve 0 arasindadir. 0.5'den ne kadar uzaklasirsa + ve - olarak
+o kadar dengesiz bir dagilim vardir demektir. 0.5 dengeli olur. 0,7 ve 0,3 dengesizdir.
+
+						Gercek Positives / TOPLAM
+
+Null Error Rate(Bos Hata Orani) = Cogunluk sinifina ait deger(1 veya 0) surekli tahmin edilseydi ne oranda yanlis tahminleme yapildiginin bir olcusudur.
+Bu, siniflandiricilarin karsilastirilmasi icin yararli bir temel metrik olabilir. Bazen en iyi siniflandirmayi yapan modelin hata orani, bos hata oranindan
+daha yuksek olabilir; buna Dogruluk Paradoksu(Accuracy Paradox) denir.
+
+Cohen's Kappa = Siniflandiricinin aslinda ne kadar iyi performans gosterdiginin bir olcusudur. Diger bir deyisle, dogruluk ve bos hata orani arasinda buyuk
+bir fark varsa, bir modelin yuksek bir Kappa puani olacaktir. Cohen's Kappa sadece iki siniflandirici arasinda karsilastirma yapmaya yarar, eger ikiden fazla
+siniflandirici varsa Fleiss's Kappa kullanilir.
+
+F-Score = Bu, gercek pozitif degerlerin oraninin(Recall) ve hassasiyetin(Precision) harmonik ortalamasidir. Siniflandiricinin ne kadar iyi performans
+gosterdiginin bir olcusudur ve siniflandiricilari karsilastirmakta siklikla kullanilir.
+
+						2 * Precision * Recall / Precision + Recall
+
+
+ROC Curve(Receiver Operating Characteristic Egrisi) = Bu, siniflandiricinin tum olasi degerler uzerinde performansini ozetlemek icin kullanilan bir grafiktir.
+Belirli bir sinifa gozlem atanmasi esigini degistirdigimizde Recall(x ekseni) karsi Yanlis Pozitif Degerlerin Oranini(y ekseni) cizerek olusturulur.
+
+		
+
+*******************************************************K-Nearest-Neighbors(KNN)-**************************************************
+
+	KNN, Denetimli Ogrenmede classification ve regression icin kullanilan algoritmalardan biridir. En basit ML Algoritmasi olarak kabul edilir.
+Diger Denetimli Ogrenme Algoritmalarinin aksine, egitim asamasina sahip degildir. Egitim ve test hemen hemen ayni seydir. Tembel bir ogrenme turudur. Bu nedenle
+KNN, genis veri setini islemek icin gereken algoritma olarak ideal bir aday degildir.
+KNN, girilen verinin en yakin komsularina bakilir ve cogunluk hangisindeyse yeni veriyi o kumeye dahil eder. Kac tane komsuya bakilacagida k ile belirtilen
+numeric degere gore karar verilir. k degeri genelde tek sayi secilir.
+
+KNN, oruntu tabanli ogrenme ve tembel ogrenme turudur; burada islev sadece yerel olarak yaklastirilir ve tum hesaplama, siniflandirmaya kadar ertelenir.
+K-NN Algoritmasi, tum ML Algoritmalarindan en basit olanlarindan biridir.
+
+Euclidean Distance(Oklid Uzakligi)   ->		D = ((x1 - y1)^2 + (x2 - y2)^2 + ..... + (xn-yn)^2)^1/2
+
+Standardized Variable   -> 			Xs = X - Min / Max - Min
+
+
+*******************************************************Support Vector Machine******************************************************
+
+Dogrusal olarak birbirinden ayrilabilecek 2 tane sinifi birbirinden ayirmak icin bulunmustur.
+
+SVM; Classtering veya Regression problemleri icin kullanilabilen Denetimli bir ML Algoritmasidir. Bununla birlikte daha cok Classification problemlerinde
+kullanilmaktadir.
+Bu algoritmada, her bir veri maddesini belirli bir koordinatin degeri olan her ozelligin degeri ile birlikte n-boyutlu bosluga(burada n sahip oldugumuz
+ozellik sayisi) bir nokta olarak cizilir. Ardindan, iki siniftan oldukca iyi ayrim yapan hiper-duzlemi bularak siniflandirma gerceklestirilir.
+
+SVM'ler sadece gozlemin koordinatlaridir.
+
+***Veriler etiketlendirilmediginde Denetimli Ogrenme(Supervised Learning) mumkun degildir.
+
+
+*************************************************************Naive Bayes***********************************************************
+
+Conditional Probability(Kosullu Olasilik):
+
+p(A|B) -> B gerceklestiginde A'nin da gerceklesme olasiligi demektir.
+
+p(A|B) = p(A kesisim B) / p(B)
+
+Bayes;
+
+p(Y|X) = p(X|Y) * p(Y) / p(X)
+
+X gerceklestiginde Y'nin gerceklesme olasiligi = p(X kesisim Y) * Y'nin gerceklemesi / X'in gerceklesmesi
+
+Y = sonuc, kredi basvurusu onayi(evet, hayir), pc alma(evet, hayir) gibi.
+
+X = features, kisinin maasi, cinsiyeti, meslegi, yasi, boyu vb.
+
+
+Naive Bayes, dengesiz veri kumelerinde calisabilir.
+
+Lazy and Eagle Learning;
+Naive Bayes, Lazy Learning olarak calisir. Yani sonradan ogrenir. Yani gelen veriyi elimizdeki veri kumesine gore siniflandirir. Diger features icin hesaplama
+yapilmaz.
+Birde Eager Learnin var. Istekli Ogrenme. O da veri daha gelmeden once, veri kumesi uzerinden ogrenir. Tum features icin hesaplama yapilir. Veri setini
+unutabilir ancak ogrendigi olasiliklari unutmaz ve buna gore de gelen her veriyi hangi sinifa dahil olmasi gerektigini bulabilir.
+	Bazen veri kumesi cok karmasik veya detayli olabiliyor. Bu veri kumesi uzerinde Eager Learning'i calistirmak cok maliyetli olabiliyor. Bu yuzden
+Lazy Learning'i tercih edebiliyoruz. Ozellikle Big Data calismalari guncel hale geldikten sonra.
+
+Gaussian Naive Bayes:
+Gauss Dagilimi uzerinden calisir.
+Tahmin etmek istedigimiz veri, sinif veya column Continuous bir degerse. Yani sureki, reel sayi olabiliyorsa, ondalikli sayi olabiliyorsa Gaussian Naive Bayes'i
+kullanmak daha avantajli olacaktir.
+
+Multinomial Naive Bayes:
+Multinomial Distribition uzerinden calisir.
+Nomial Deger'e ornek olarak arabamizin markasi, mezun oldugumuz okul gibi birden fazla deger alabilecek olan degerlerdir. Tr'de ki uniler nominal degerlerdir.
+Bu nominal degerlere numara veriyorsak yani int sayilar veriyorsak ve bunlarin tahmini icin bir yontem kullanacaksak o zaman Multinomial Naive Bayes
+avantajli olacaktir.
+
+Bernoulli Naive Bayes:
+Bernoulli Distribution uzerinden calisir.
+Bernoulli, binary distribution'dir ayni zamanda. Ikili dagitimdir.
+Nominal olacak ancak 2 nominalden birisi olacak.
+Ornek olarak; Kadin veya Erkek, Sigara iciyor veya icmiyor, Olu ya da sag vb. varsa Bernoulli Naive Bayes kullanmak avantajli olacaktir.
+
+
+*************************************************************Decision Tree***********************************************************
+
+	Tree tabanli ogrenme algoritmalari, en cok kullanilan ve denetimli ogrenme yontemlerinden biri olarak dusunulmektedir. Tree tabanli yontemler,
+yuksek dogruluk, kararlilik ve Yorumlanma Kolayligina sahiptir. Dogrusal modellerin aksine dogrusal olmayan iliskileri de oldukca iyi esleyebilirler.
+Classification ve Regression, elde edilen her turlu sorunun cozumunde uyarlanabilirler. Decision Trees, Random Forest, Grandyan Guclendirme gibi yontemler,
+her turlu veri bilimi problemlerinde yaygin sekilde kullanilmaktadir.
+Decision Trees, hem Categoric hem de Numeric verileri isleyebilir.
+Bazi Decision Tree Algoritmalari;
+ID3
+C4.5
+C5.0
+CART
+
+
+*************************************************************Random Forest***********************************************************
+
+	Bir Ensemble Learning(Kollektif Ogrenme), birden fazla Classification Algorithms birlikte kullanan bir Classification Algoritmasidir.
+Random Forest, veri kumesini parcalara bolup bu parcalar uzerinde farkli farkli Decision Tree olusturup bu Decision Tree'lerin cogunluk oyuyla(Majority Voting)
+siniflandirma gerceklestiriyor.
+
+Regression'da ki Random Forest'dan farkli olarak Classification'da ki Random Forest;
+
+******* Leaf Node'lerde Numeric Variable degil, Class'lar yer aliyor ve o Class'larin cogunlugunun(Majority Vote) dedigi olur! ********
+
+
+Tree-1
+
+Tree-2
+
+Tree-3
+
+.	    ------->>>>>>>>    Majority Vote    --------->>>>>>>   Random Forest's Decision
+.	
+.
+.
+.
+.
+
+Tree-4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

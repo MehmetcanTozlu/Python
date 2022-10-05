@@ -1,0 +1,76 @@
+**************************************OverFitting(Asiri Uyum Gosterme) / UnderFitting(Eksik Ogrenme)*********************************************
+Overfitting;
+
+	Makine Ogrenmesi uygulamalarinda ki temel amac eldeki veriler uzerinden oruntuler elde etmek ve yeni veriler icin bu oruntuler uzerinden dogru
+tahminleri yapmaktir. Bu tahminleri yapabilmek icin ML uygulamalari sonucunda bir model elde ederiz.
+	Model, girdileri ciktilara eslenmesi icin kullanilan bir sistemdir. Ornegin; amacimiz araba fiyatlarini tahmin etmek olsun. Bunun icin arabanin
+ozelliklerini input olarak kullanan bir model olustururuz ve output olarak da arabanin fiyatini veririz.
+
+Bir model bir problem hakkinda teori uretir. Bu ornegimizdeki model, aracin ozellikleri ile fiyati arasinda bir iliski olmasidir. Training veri calismalari
+sonucunda bu iliskiyi ogrenmis bir model elde etmis oluruz.
+
+y = B0*x^0 + B1*x^1 + B2*x^2 + B3*x^3 + ....... + Bn*x^n + E
+
+y -> Output, tahminlenen deger, / arabanin fiyati.
+x -> Features, modelin degiskenleri, / arabanin modeli, rengi, vites tipi, motor hacmi vb.
+B(Beta) -> modelin parametreleri, bu parametreler egitim seti uzerinde calismalar yaptikca ogrenilmektedir.
+E(Epsilon) -> hata degeri.
+
+Model B degerlerini ogrendikten sonra istedigimiz x degiskenlerini formule koyarak y degerine ulasabiliriz.
+
+	ML'de gelecek veriler hakkinda tahmin yapmak icin verilerimizi train ve test ou iki alt kumeye ayiriyoruz. Modelimizi train verilerinden elde edilen
+oruntulere gore olusturuyoruz. Bu islem sonucunda 2 durum meydana gelebilir. Bunlar;
+1. Modelimiz asiri ogrenebilir
+2. Modelimiz eksik ogrenebilir
+
+Overfitting;
+	Eger modelimiz train icin kullandigimiz veri setimiz uzerinde gereginden fazla calisip ezber yapmaya baslamissa ya da train setimiz tek duze ise
+overfitting olma riski yuksek demektir.
+Train setinde yuksek bir skor aldigimiz bu modelde, yuksek ihtimal test verilerimizi gosterdigimizde dusuk bir skor verecektir. Cunku model train seti
+uzerindeki durumlari ezberlemistir, ve test setinde bu durumlari aramaktadir.
+
+********Overfitting problemi olan modellerde YUKSEK VARYANS, DUSUK BIAS durumu gorulmektedir.*********
+
+
+Varyans; Olasilikta ve Istatistikte varyans bir rassal(random) degisken.
+Varyans, model train veri setinde iyi performans gosterdiginde, ancak bir test veri kumesi veya dogrulama veri kumesi gibi, egitilmemis bir veri kumesinde
+iyi performans gostermediginde ortaya cikar.
+*****Varyans gercek degerden tahmin edilen degerin ne kadar daginik old. soyler.*****
+Varyans = ((Her terimin toplami - ortalama)^2) / n
+
+Bias; Gercek degerlerden tahmin edilen degerlerin ne kadar uzak oldugudur. Tahmin edilen degerler gercek degerlerden uzaksa, BIAS yuksektir.
+
+Yuksek BIAS Dusuk VARYANS; Modeller tutarlidir ancak ortalama hata orani yuksektir.
+Yuksek BIAS Yuksek VARYANS; Modeller hem hatali hem de tutarsizdir.
+Dusuk BIAS Dusuk VARYANS; Modeller ortalama olarak dogru ve tutarlidir. Modellerimizde bu sonucu elde etmeye calismaliyiz.
+Dusuk BIAS Yuksek VARYANS; Modeller bir dereceye kadar dogrudur ancak ortalamada tutarsizdir. Veri Setinde ufak bir degisiklik yapildiginda buyuk hata
+oranlarina neden olmaktadir.
+
+Overfitting; genellikle model cok karmasik old.(yani gozlem sayisina kiyasla cok fazla feature varsa) gerceklesir. Bu model train setinde cok yuksek
+basarim elde ederken test setinde cok az basarim elde edecektir. Bu sorun modelin genellestirme yapamamasindan kaynaklanmaktadir.
+Bu tip modeller verilerdeki degiskenler arasindaki gercek iliskiler yerine train verilerinde ki 'Gurultuyu' ogrenir veya aciklar.
+
+Bunun Onune Gecmek Icin;
+
+- Featur Sayisini Azaltmak; Birbirleriyle yuksek korelasyonlu olan column'lar silinebilir ya da faktor analizi gibi yontemlerle bu degiskenlerden tek bir
+degisken olusturulabilir.
+
+- Daha Fazla Veri Eklemek; Eger egitim seti tek duze ise daha fazla veri ekleyerek veri cesitliligi arttirilir.
+
+- Regularization(Duzenleme); Modelin karmasikligini azaltmak icin kullanilan bir tekniktir. Bunu kayip fonksiyonunu cezalandirarak yapar. Yani modelde
+weight degeri yuksek olan degiskenlerin weight degerini azaltarak bu degiskenlerin etki oranini azaltir. Bu yontem Asiri Ogrenme probleminin cozulmesine
+yardimci olur.
+Kayip Fonksiyonu, gercek deger ile ongorulen deger arasindaki farkin karelerinin toplamidir.
+Degiskenlerin weight degerini azaltmak icin regularization degerini arttirmak gerekir.
+En populer Regularization metotlari 'Lasso' ve 'Ridge' teknikleridir.
+
+
+Underfitting;
+	Asiri ogrenmenin aksine, bir model yetersiz ogrenmeye sahipse, modelin egitim verilerine uymadigi ve bu nedenle verilerdeki 'trendleri' kacirdigi
+anlamina gelir. Ayrica modelin yeni veriler icin de genellestirme yapamadigi anlamina da gelir.
+Bu problem genellikle cok basit bir modelin sonucudur(yetersiz tahminleyici bagimsiz degisken eksikligi).
+
+Underfitting sorunu olan modellerde hem train hem de test veri setinde hata orani yuksektir.
+Dusuk VARYANS ve Yuksek BIAS'a sahiptir.
+Bu modeller train verilerini cok yakindan takip etmek yerine yok sayar ve girdiler ile ciktilar arasindaki temel iliskiyi ogrenemez.
+Underfitting, Overfitting kadar yaygin degildir.

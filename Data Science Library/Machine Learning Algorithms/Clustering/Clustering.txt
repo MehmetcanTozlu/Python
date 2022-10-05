@@ -1,0 +1,215 @@
+******************************************************************CLUSTERING(KUMELEME)*******************************************************************
+
+	Clustering, Unsupervised Learning icin onemli bir kavramdir.
+
+	Clustering, ne yazik ki Makine Ogrenmesinin cok da gelismedigi yontemlerdendir. K-Means ve Hierarchical yontemleri Clustering'e ornektir. Bu bile az
+gelistigine ornektir. Classification'da 5 6 tane Algoritma varken Clustering'de bu sayi 2'dir.
+Gunumuzde Bilgisayarla Goru, Goruntu Isleme, Musteri Segmentasyonu gibi Pazar Segmentasyonu gibi yontemler Clustering'in hizli bir gelisimine sebep oldular.
+
+	Clustering Algorithms, basitce veri kumesindeki elemanlari kendi arasinda gruplamaya calisir. Burada kac grup olacagi bizim insiyatifimizde olan bir
+bilgi de olabilir veyahut en uygun kume sayisini algoritmanin kendisi de belirleyebilir.
+
+	Unsupervised Learning, olusturulan modelde kullanicinin herhangi bir denetiminin olmadigi makine ogrenmesi teknigidir. Modelin yeni gelen verilere
+nasil davranacagi kullanilan algoritmaya baglidir. Bu gruplarda ki veriler Unlabelled(Etiketsiz) verilerdir.
+
+	Ayrica Unsupervised Algorithms, Supervised Algorithms gore daha karmasik surecler icerebildiginden dolayi diger ogrenme yontemlerine kiyasla daha
+ongorulemez de olabilir.
+
+
+Clusterin sektorde en fazla;
+
+- Musteri Segmentasyonu
+	- Collaboration Filtering -> Tavsiye Algoritmalari, Biz musteriye dogru urunu satabilir miyiz?
+		Ornegin; Ayni segmentteki musterilere alabilecek olduklari urunleri gostermek.
+	- Ozel Kampanyalar -> Segmenti taniyorsak, o segmentin diger ozelliklerinide taniyoruz.
+		Ornegin; Musterilere araba satacagiz ve bu musteriler tenis oynamayi seviyor. O zaman tenis sahalarina yakin yerlerde reklam verilir.
+	- Tehdit ve Sahtekarlik Yakalama
+	- Eksik Verilerin Tamamlanmasi 
+	- Verinin Alt Kumesi Uzerinde Yapilan Butun Islemler
+
+- Pazar Segmentasyonu
+	- Davranissal Segmentasyon -> Android kullananlar free apps tercih etmeleri. Apple kullananlarin da apps'lere para odemesi bir Davranissal Segmentasyon. 
+	- Demografik Segmentasyon -> Musterilerin yasi, cinsiyeti gibi demografik bilgilerinin alinarak Segmente edilmesi.
+	- Psikolojik Segmentasyon -> Musterilerin hayalleri, beklentileri ile ilgili Segmente edilmesi.
+	- Cografi Segmentasyon -> Musterilerin Ulkelere, Sehirlere gore Segmente edilmesi.
+	- Verinin Alt Kumesi Uzerinde Yapilan Butun Islemler
+- Saglik ve Goruntu Isleme
+
+
+
+Clustering Mantigi; 
+	Cluster icinde ki ornekler arasindaki mesafeyi en azda tutmak. 2 Cluster arasindaki mesafeyi en fazla tutmak.
+
+Unsupervised Learning Yontemleri genel olarak 3'e ayriliyor.
+
+1. Bolunmeli Yontemler(K-Means)
+2. Hiyerarsik Yontemler(Agglomerative, Divisive)
+3. Yogunluk Tabanli Yontemler(GMM, DBSCAN, OPTICS)
+
+
+****************************************************************K-MEANS************************************************************
+
+Nasil Calisir?
+- Kac Kume Olacagi Kullanicidan Parametre Olarak Secilir
+- Rastgele Olarak k Merkez Noktasi Secilir
+- Her Veri Ornegi En Yakin Merkez Noktasina Gore Ilgili Kumeye Atanir
+- Her Kume Icin Yeni Merkez Noktalari Hesaplanarak Merkez Noktalari Kaydirilir
+- Yeni Merkez Noktalarina Gore
+
+Amacimiz;
+N adet Veri Nesnesinden olusan bir veri kumesini giris parametresi olarak verilen K adet kumeye bolumlemektir. Amac gerceklestirilen bolumleme islemi sonunda
+elde edilen kumelerin, kume ici benzerliklerinin maximum, kumeler arasi benzerliklerinin ise minimum olmasini saglamaktir.
+
+K-Means en sik kullanilan Clustering Algoritmalarindandir. Uygulanmasi kolaydir. Buyuk olcekli verileri hizli ve etkin bir sekilde kumeleyebilir.
+
+Tekrarli bolumleyici yapisi ile K-Means Algoritmasi, her verinin ait old. kumeye olan uzakliklari toplamini kucultmektedir. K-Means algoritmasi karesel hatayi
+en kucuk yapacak olan K adet kumeyi tespit etmeye calismaktadir.
+
+
+----- K-Means Dezavantajlari, Baslangic Noktasi Tuzagi ------
+
+	Bir rastgelelik varsa ciddi sikinti cikma potansiyeli de vardir. Cunku ne uretilecegi kontrol edemiyoruz. K-Means'de boyle bir sikintiya sahip
+algoritmalardan biridir. Rastgele verilen Center Pointler(Veri Merkezleri) sikinti cikarabiliyor.
+
+Bu hatalarin onune gecmek icin;
+
+K-Means++ algoritmasi gelistirilmis.
+
+-------- K-Means++ -------
+
+	Data Point noktalarinin rastgele seciminden dolayi K-Means++ Algoritmasi gelistirilmistir.
+Algoritma K-Means gibi isleme basliyor. Rastgele olarak Center Point'leri dagitiyor.
+Center Point ile diger Data Point'ler arasindaki Mesafe hesaplaniyor. Buna Dx (Distance(x)) denir.
+Center Point ile Mesafesi fazla olan Data Point'in yeni Center Point olma olasiligi artar.
+
+
+************************************************************Hierarchical Clustering**********************************************************
+
+	Bildigimiz gibi K-Means Algoritmasinin bir dezavantaji vardi. K parametresini disaridan aliyordu. Hierarchical Clustering yontemi bu dezavantaji
+ortadan kaldirmak icin gelistirilmistir.
+
+	Hierarchical Clustering Algoritmasinin temel mantigi, benzer ozniteliklerin bir araya gelmesi veya tam tersine bolunmesine dayanmaktadir. Bu calisma
+mantigina gore;
+Agglomerative(Birlestirici) ve Divisive(Bolucu) olmak uzere iki temel yaklasimi vardir.
+	TUME VARIM(Bottom Up) olarak da bilinen birlestirici yaklasimda,
+baslangicta tum nesneler birbirlerinden ayridir. Yani eldeki verinin her biri ayri bir kume olarak ise baslanir. Ardindan benzer ozellikte olan/mesafesi
+az olan kumeler bir araya getirilerek tek bir kume elde edilmeye calisilir. 
+	TUMDEN GELIM(Top Bottom) yaklasiminda ise Tume Varim metodunun aksine ayristirici bir strateji hakimdir. Bu yaklasimda baslangicta bir tane kume vardir.
+Her asamada uzalik/benzerlik matrisine gore nesneler ana kumeden ayrilarak, farkli alt kumeler olusur. Surec sonunda her veri bir kume olur.
+
+Hierarchical Clustering Analizinde, veriler arasindaki uzaklik ve benzerlik hesaplamalari her adimda guncellenmektedir. Hesaplanan uzaklik/benzerlik 
+degerlerinden olusan matris, secilen baglanti yonteminin kullanilmasina temel teskil etmektedir.
+
+
+------ Agglomerative(Birlestirici) Hierarchical Clustering Algorithm -------
+
+	Bu yontemde her birim baslangicta ayri bir kume olarak kabul edilir ve benzer birimler/mesafesi yakin olanlar bir araya getirilerek n birim asamali
+olarak sirasiyla n, n-1, n-2, ..., n-r kumeye yerlestirilir.
+
+Calisma Yapisi:
+1. n tane birey n tane kume ou islemlere baslanilir.
+2. En yakin iki kume(dij degeri en kucuk olan) birlestirilir.
+3. Kume sayisi bir indirgenerek yinelenmis uzakliklar matrisi bulunur.
+4. 2. ve 3. adimlar (n-1) kez tekrarlanir.
+
+Siklikla Kullanilan Baglanti(Linkage) Yontemleri Soyledir;
+	- Baglanti Temelli Teknikler
+		- Tek Baglantili(Single Linkage) / En Yakin Komsu Yontemi(KNN)
+		- Tam Baglantili(Complete Linkage) / En Uzak Komsu Yontemi(FNN)
+		- Ortalama Baglanti(Average Linkage)
+	- Varyans Temelli Teknikler
+		- Ward Yontemi(Ward's Linkage)
+	- Merkezilestirme Temelli Teknikler
+		- Medyan Baglanti(Median Linkage)
+		- Merkezi Baglanti(Centroid Linkage)
+
+Single Linkage:
+	Uzaklik Matrisinden yararlanilarak birbirine en yakin iki yapi veya kume birlestirmektir.
+	Dezavantaji, islemlerin uzun surmesidir.
+
+Complete Linkage:
+	Ilgili yapilar arasindaki en buyuk uzaklik dikkate alinarak birlestirme islemi gerceklestirmektedir.
+	Dezavantaji, veri setindeki uc noktalara karsi duyarli olmasidir.
+
+Average Linkage:
+	Iki yapi icerisindeki verilerin birbirleri arasindaki uzakliklarin ortalama degerini dikkate alarak gerceklesen birlesme islemidir.
+	Bu yontem Single ve Complete Linkage arasinda uygun bir tercihtir.
+
+Ward's Linkage:
+	Ward(1963), her gruplamayla iliskili bilgi kaybini en aza indirecek ve bu kaybi kolayca yorumlanabilir bicimde olcecek bir yontem onermistir.
+	Bilgi Kaybi, Ward tarafindan Hata Kareler Toplami olarak tanimlanir. Bu yontem, en kucuk mesafeli gruplari bir araya getirmez, ancak belirli bir
+	heterojenite olcusunu cok fazla arttirmayan yapilari birlestirir(min. varyans degerine sahip olanlari).
+	Ward Yonteminin amaci, yapilari, bu yapilar icindeki cesitliligin cok fazla artmamasi icin birlestirmektir. Bu, mumkun oldugunca homojen kumeler
+	halinde yapilar olusturur.
+
+Centroid Linkage:
+	Iki yapi(kume) arasindaki uzaklik olcusu olarak Kareli Euclid(Squared Euclidean) uzakligi kullanilmaktadir. Her kume, o andaki kumenin agirlik noktasi
+	ile temsil edilir. Iki kume birlestiginde, agirlik noktalarinin birbirlerinden minimal uzaklikta olmasi yeterlidir. 
+	Bu yontemin en onemli avantaji farkli nitelikteki gozlemlerden cok fazla etkilenmemesidir.
+
+Median Linkage:
+	Birlestirilecek iki yapinin boyutlari cok farkliysa, yeni yapinin agirlik merkezi daha buyuk olan yapinin agirlik merkezine cok yakin olacaktir.
+	Centroid yonteminin bu dezavantaji yuzunden 1967'de Gower, medyan yontemini onermistir. Bu yontem, hem benzerlik hem de uzaklik yaklasimlari icin
+	uygun hale getirebilir.
+
+
+Hierarchical Clustering Analizinde kullanilan en etkin gorsellestirme araci DENDOGRAM'lardir. 
+Dendogram, hierarchical clustering yontemiyle elde edilen sonuclarin kolaylikla anlasilmasini saglamaktadir.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,474 @@
+******************************************************************CRISP-DM*******************************************************************
+
+CRISP-DM(Cross-Industry Standart Process for Data Mining);
+
+	Is problemlerinin veri tabani cozumlerle nasil cozumlendigini anlatmak ve is uygulamalarinin verimliligini arttirmak amaciyla kullanilan
+standartlasmis bir metodolojidir.
+
+	Crisp-DM, yuksek seviyeli bir metodoloji old. dolayi modelde belirtilen asamalar, is ihtiyaclarini karsilamak icin bir cok farkli bicimde, sirada
+ve teknolojide uygulanabilmektedir.
+Toplamda 6 asamadan olusan modelin semasi asagidaki gibidir;
+
+	|------>------>------->------->------->------>------>------>------->----|
+	|									|
+	|	  Business->----->----->----->------>---->--Data		|
+	^	Understanding----<------<---------<-----Understanding		|
+	|	 (baslangic)				     |			*
+	|	     |					     *			|
+	^	     |					     |			|
+	|	     ^					     *			|
+	|	     |					     |			*
+	|	     |		     DATA		   Data			|
+	^	     ^					Preparition		|
+	|	     |	             			   |  |			|
+	|	     |				 	   ^  *			*
+	|	     ^					   |  |			|
+	|	     |					   ^  *			|
+	^	     |					   |  |			|
+	|        Evaulation---<------<------<------<-----Modelling		*
+	|	     |								|
+	| 	     |								|
+	|            *								|
+	^            |								*
+	|	     *								|
+	|	     |								|
+	|        Deployment							*
+	^	   (son)						     	|
+	|----<------<-----<-----<------<------<-----<------<------<------<------|
+
+
+Business Understanding;
+	Bu asamada proje hedeflerinin ve gereksinimlerini is perspektifinden degerlendirmek ve daha sonra bu degerlendirmeyi belirlenmis problem tanimina
+ve hedeflere ulasmak icin tasarlanmis bir on plan olusturmaktir. Bu asama, veri kaynaklarinin ve ihtiyac duyulacak alanlarin tanimlanmasini icerse de
+verilerin herhangi bir analizini icermez.
+
+Örneğin; uluslararası şirketlere petrol tedariği eden bir şirkette veri bilimcisi olarak çalışıyorsunuz ve müdürünüz takımınızdan
+geçmiş on yılın verilerine bakılarak gelecek yıl ne kadar ürün satışı yapılabileceğini bulmanızı istiyor.
+
+
+Data Understanding;
+	Ikinci asama olan veriyi anlama asamasi, ilk veri toplama islemiyle baslar ve verileri tanimak, veri kalitesi sorunlarini tanimlamak, verilerle ilgili
+ilk bilgileri kesfetmek veya gizli bilgiler icin hipotezler olusturmak uzere tasarlanmis etkinliklerle devam eder.
+
+Bu aşamada tedarikçisi olduğunuz firmalara yapılan geçmiş on yıllık satış miktarı ve fiyatlarını içeren veri setinizi oluşturdunuz.
+Veriyi anlamak amacıyla belirlemiş olduğunuz değişkenlerin türlerini, merkezi ve dağılım ölçülerini incelediğinizi, değişkenler arasındaki ilişkileri
+belirlediğinizi, yıllık ve firma bazında ne kadar satış gerçekleştiğini, kar edildiğini gözlemleyerek veriyi tanıdığınızı düşünebilirsiniz.
+
+
+Data Preparition;
+	Ucuncu asamada veriler Data Modelling asamasina hazirlanir. Genellikle veriler beklendigi gibi temiz olmayabilir veya yapisal olarak bozuk olabilir.
+Ornegin; veri setindeki eksik verilerle nasil basa cikilacagina dair strateji gelistirmek, aykiri ve gurultulu verilerle basa cikilmasi, degiskenlerin
+kategorik hale getirilmesi ya da siralanmasi, logaritmik donusumlerin yapilmasi gibi islemler bu asamada yapilir.
+
+Veri setinizi incelediğinizde satış miktarı değişkeninde eksik veriler olduğunu düşünelim bu verileri silmek veri kaybına neden olacağından dolayı
+eksik verileri, eksik veri tamamlama yöntemlerinden biri olan mean substitution(ortalama töhmet) ile doldurarak veri setinizi modele hazır hale
+getirildiğini düşünebilirsiniz.
+
+
+Modelling;
+	Dorduncu asama olan modelleme asamasi, verileri tanimlayan bir model ve oruntu olusturmaya calisan temel adimlardan biridir. Ayni zamanda proje
+hedeflerinin karsilanmasi veya yerine getirilmesi gereken sonuclardan sorumludur. Bu yuzden probleme Dogru Algoritmanin uygulanmasi onemlidir.
+
+Bu aşamada, probleminiz tahminleme ve tahmin edeceğiniz değer sürekli olduğundan dolayı veri setinize denetimli öğrenme yöntemlerinden
+çoklu doğrusal regresyon modelini uyguladığınızı düşünebilirsiniz.(Bu sizin tercihinize göre değişebilir.)
+
+
+Evaluation;
+	Model olusturulduktan sonra, performansinin ne kadar iyi old. kontrol etmeliyiz. Modelimizin performansini olcerek ve nasil calistigini gormek icin
+performans hedeflerimizle karsilastirmaliyiz. Genellikle, veri bilimi projelerinde veri bilimci, verileri egitim ve test verisi olarak ikiye boler.
+Bu adimda test verilerini kullanarak, bir onceki asamada olusturdugu modelin gercege ne kadar uygun old. dogrulayarak modelin basarisini, performansini
+degerlendirir.
+
+Bu aşamada modelinizin performansı değerlendirdiniz ve modelinizin başarısı %60 çıktı diyelim fakat amaçladığınız başarı oranı %80 ise
+bir önceki aşamaya dönerek veri setinizi yeniden modelleyebilirsiniz.
+
+
+Deployment;
+	Metodolojinin son asamasi olan uygulama asamasinda degerlendirilen modelin verileri A/B testi gibi farkli gercek zamanli(real time) test ve
+degerlendirmelere tabi tutulduktan sonra elde edilen nihai bilgiler, onay surecinin ardindan canliya alinir.
+
+**********************************************************Veri Tipleri Arasi Donusum*********************************************************
+
+Veri -> Kategorik / Sayisal
+Kategorik -> Nominal / Ordinal
+Sayisal -> Oransal(Ratio) / Aralik(Interval)
+
+
+Kategorik Veriler(Categorical);
+Ornegin; bir kisinin sigara icip icmemesi,  bir bireyin kadin veya erkek olup olmamasi,  bir kisinin egitim duzeyinin universite, lise, ortaokul, yukseklisans
+olup olmamasi gibi verilerdir.
+
+Ordinal;
+	Ordinal, order'dan gelir. Aralarinda buyukluk kucukluk bulunabilen, bir siraya sokulabilen ama Olculemeyen verilerdir.
+	Ornegin plaka numaralari, aralarinda siralanabilir ancak bunlar arasinda bir buyuktur kucuktur mantigi kurulamaz.
+
+Nominal;
+	Nominal veriler ne Siralanabilir ne de Olculebilen verilerdir.
+	Ornegin; Araba markasi, Cep telefonu markasi gibi veriler arasinda ne siralama yapabiliriz ne de herhangi bir olcu verilebilir.
+
+
+Sayisal Veriler(Numeric);
+	Ornegin; bir kisinin yasi, boyu, ayakkabi numarasi, ne kadar maas alacagi gibi verilerdir.
+
+Ratio;
+	Ratio, birbirlerine gore orantilanabilen, carpilip bolunebilen degerlerden olusur.
+	Ornegin; yas bir ratio degerdir. Babasinin yasi oglunun yasinin 2 katidir gibi.
+
+Interval;
+	Interval, herhangi bir carpma islemini kabul etmeyen, toplama islemini kabul eden degerlerdir.
+	Ornegin; sicaklik verileri, belirli bir aralik icinde olabilir ancak carpma islemi sonucu anlamli bir deger dondurmeyen verilerdir.
+
+
+	Bu veri yapisini ortaya koyduktan sonra asil derdimiz bu veri tipleri arasinda gecis yapabilmek. ML algoritmalarinin degisik sebeplerle bunlar
+arasinda gecis yapmasi gerekiyor. Mesela, sayisal veriler uzerinde calisan bir ML algoritmamiz varsa bu kisilerin ulkelere gore farkini bulamayacagiz.
+
+
+**Kategorik Verilerimizi ornegin TR, USA, FR gibi ulkelerin bulundugu bir veri setini dusunelim. Bu ulkelere ait kisiler de olsun.
+Siralamasi da TR, USA, TR, FR, FR, USA, TR, FR, USA, FR, USA olsun.
+
+Ilk isimiz bu verileri tekrarsiz bicimde Column'lara yazmak.
+Asagidaki sekilde tablomuzu olusturup bulunan ulke degerine 1 olmayanlara 0 yazacagiz.
+(Label Encoder islemi ilk gelir sonda OneHotEncoding islemi yapilir)
+
+		TR	USA	FR
+TR		1	0	0
+USA		0	1	0
+TR		1	0	0
+FR		0	0	1
+FR		0	0	1
+USA		0	1	0
+TR		1	0	0
+FR		0	0	1
+USA		0	1	0
+FR		0	0	1
+USA		0	1	0
+
+******Buradaki amacimiz, Nominal veya Ordinal olan verilerimizi Sayisal degerlere cevirmektir.*******
+
+sklearn kutuphanesinin bazi fonksiyonlari;
+
+fit(): Bu metodu veri setinde bir donusum yapilacaginda, Label Encoding(Kategorik veriyi Numeric veriye donusturmek) yapilacaginda veya bir model kurulacaginda
+kullaniriz. Ornek vermek gerekirse, bir veri modelinde kullanacaksak ortalamayi, standart sapma degerlerine ihtiyac vardir. Diger bir ornek olarak;
+eger bir veri setini 0-1 arasinda normalizasyon islemi(cok fazla satir sutun iceren tablolari daha az satir sutun icerecek sekilde parcalara bolmek)
+yapilacaksa veri setindeki max ve min degerler gerekir. fit() metodu bu islemleri arkaplanda hesaplar ancak bu metodun kendi basina bir ciktisi yoktur.
+
+transform(): Adindan da anlasilacagi gibi donusturme islemini gerceklestirir. Ancak bir veri setini fit etmeden once transform islemi uygulanamaz. Cunku,
+donusum islemi yapilacak parametreler hesaplanmamistir.
+
+fit_transform(): Bu method ayni zamanda hem fit() hem de transform() islemini uygular. 
+
+***NOT***: Model egitirken sadece train verisine fit veya fit_transform yapmaliyiz. Cunku; biz train datasindaki verileri kullanarak model egitiyoruz ve test
+datasiyla da test ediyoruz. Eger test datasinida fit edersek modele test datasi hakkinda ipucu vermis oluruz. Modelin ogrendigi her sey train datasinda
+olmali. Bu yuzdek genellikle train datasi .fit_transform(), test datasi(traindeki parametreler kullanilarak) sadece .transform() edilir.
+
+
+*****************************************************Feature Scaling(Ozellik Olceklendirme)*************************************************
+
+Verileri modele vermeden once dikkat edilmesi gereken bazi hususlar vardir. Bunlar;
+
+-Verinin Dagilimi: Verinin normal dagilip dagilmamasi bazi algoritmalarin calismasini etkileyen bir faktordur. Veriler saga yatik veya sola yatik ise model
+performansin bu durumdan etkilenebilir.
+
+-Ozellikler Arasindaki Olcek Farkliliklari: Bir ornekten faydalanalim. Verimiz yas ve gelir boyutlarini iceriyor olsun. Yas araligi 0-90 yaslarini kapsiyor.
+Gelir boyutuda 0-250.000 TL arasinda degerler iceriyor olsun. Burada Oklid, Manhattan gibi uzaklik bazli hesaplamalari kullanan algoritmalar icin degerler
+sapacaktir. Bu baglamda bu ozelliklerin ortak bir veri araligina cekilmesi ile daha dogru sonuclar elde edebiliriz.
+	Bu degerleri normal hale getirmek ve baskinligi azaltmak adina bazi yontemler mevcuttur. Bunlar; Normalizasyon, Standardizasyon gibi metodlardir.
+Bu metodlar uzaklik tabanli ve gradyan tabanli tahminleyici algoritmalari kullanmadan once uygulamasi faydali olan yontemlerdir. Bu metotlar;
+
+- MinMax Scaling: Verinin 0 ile 1 arasinda degerler aldigi bir durumdur. Burada dagilim, verinin dagilimi ile benzerdir. Burada 'outlier' denilen dısta kalan
+verilere karsi hassasiyet durumu vardir, bu yuzden bu degerlerin fazla oldugu bir durumda iyi bir performans gostermeyebilir.
+Formulu -> X - Xmin / Xmax - Xmin
+
+- Robust Scaler: Normalizasyon ile benzer sekilde calisir. Aykiri degerlere sahip verilerde daha iyi sonuclar verebilir. Yine veri dagilimi ile benzerlik
+gosterir ancak aykiri degerler dista kalir. Medyan degeri sonradan kullanilmak uzere elenir ve degerler 1. ve 3. kartil araligina oturtulur.
+Formulu -> X - Q1(X) / Q3(X) - Q1(X)
+
+- MaxAbs Scaler: Her ozelligin maksimum mutlak degeri 1 olacak sekilde her ozelligi ayri ayri olceklendirir ve donusturulur.
+Formulu -> X / max(abx(X))
+
+- Standardizasyon(Standart Scaler): Ortalama degerin 0, standart sapmanin ise 1 degerini aldigi, dagilimin normale yaklastigi bir metoddur.
+Formulu, elimizdeki degerden ortalama degeri cikartiyoruz, sonrasinda varyans degerine boluyoruz.
+Formulu -> (X - u) / s
+
+- PowerTransform: Varyansi stabilize etmek ve carpikligi en aza indirmek icin en uygun olceklendirme faktorunu bulur. Yine ortalama degerin 0,
+standart sapmanin ise 1 old. durumdur.
+
+
+*************************************************************Predict Algorithms*********************************************************
+
+Verileri 2 gruba ayirmistik.
+- Kategorik
+- Numerik
+
+*** Kategorik Veriler uzerinde bir Tahmin yapildiginda bu Classification(Siniflandirma) olur. Birinin cinsiyetini, egitim seviyesini gibi kategorik verilerini
+tahmin etmeye calisiyorsak buna CLASSIFICATION olarak degerlendiriyoruz.
+
+
+*** Numerik Veriler uzerinde bir Tahmin yapildiginda bu Predict(Tahmin) olur. Dolar Kuru, Birinin Yasi, Gelir Duzeyini,
+Bir sonraki yil satislari degerlendirmek gibi bunlara benzer sayisal degerleri tahmin etmek istiyorsak bunlari PREDICTION olarak degerlendiriyoruz.
+
+
+Tahmin(Prediction) ve Ongoru(Forecasting) arasindaki farklar;
+Prediction daha genel bir kavramdir. Forecasting Prediction'in daha ozel bir halidir.
+Forecasting; gelecegin tahmini, ongorusu olarak kullaniliyor. Her hangi bir yere kadar bir zaman serisi uzerinde tahmin yapmissak daha sonrasinin tahmin
+edilmesi. Ornek olarak, bugune kadar ki borsa verilerini alip yarinki, bir sonraki haftanin ki gibi dolarin durumunun tahmin edilmesi
+gibi durumlari Forecasting olarak kabul edebiliriz.
+*****Prediction'un Forecasting'den asil farki;
+	Prediction gecmis verilerin tahmininide veya aradaki verilerin tahmininide icerir. Ornegin, orneklerimizi dizdigimiz zaman arada eksik bir veri var
+ve bu veriyi tahmin etmek istiyoruz. Prediction'da gecmis gelecek iliskisinin kurulmasi sart degildir.
+
+*****Genel olarak Prediction, Sayisal degerlerin tahmin edilmesi problemleridir.*****
+
+
+***********************Simple Linear Regression(Basit Dogrusal Regresyon)*****************************
+
+Simple Linear Regression; *Bir bagimli bir bagimsiz degisken* arasindaki iliskiyi olcmek icin kullanilan analiz metodurur.
+ML Algoritmalarinin temeli olarak kabul gorur.
+Amac bu iki degisken arasindaki baglantiya en yakin dogrusal sonuc elde etmektir.
+
+Basit Dogrusal Regresyon; 
+
+y = a*x + b formuluyle bir dogru cizme fikrini alip veriler uzerine uygulamaktir.
+y -> bagimli degisken
+x -> bagimsiz degisken
+
+Bilimsel Gosterimi;
+y = A + B*x + E
+(E = Error)
+(A = Alfa)
+(B = Beta)
+
+************************Multiple Linear Regression(Coklu Dogrusal Regresyon)***************************
+
+*Birden fazla bagimsiz degiskenden* ve bir bagimli degiskenden olusan durumlar icin veriler arasindaki iliskiyi inceler.
+
+y = B0 + B1*x1 + B2*x2 + B3*x3 + ...... + Bn*xn + E
+y-> bagimli degisken
+x-> bagimsiz degisken
+B-> Beta
+E-> Error
+
+
+[Baslik] -> Dummy Variable(Kukla Degisken):
+
+Dummy Variable; bir degiskeni ifade eden baska bir degiskendir. Ornegin;
+bir Categoric degerleri Numeric degerlere cevirmek istiyoruz. Ulke, Cinsiyet, Sehir vb. Column'lar olabilir. Bu Numeric veriler asil olan degerleri temsil
+ettiginden Dummy Variable olmus olur.
+	Ayni anda 2 bilgininde Tabloda yer almasi risk olusturur. Ornegin Cinsiyet sutunu, erkek ve kadin sutunlari bulunduklari indexe 1, digerine 0.
+Sonucta her bir Column Modelimizin sonucuna etki eder. Bu yuzden Veri Onisleme asamasinda Dummy Variable ortaya cikartirken cok dikkatli olmamiz gerekir.
+Dummy Variable ve Orijinal Veriyi AYNI ANDA ALMAMAMIZ GEREKIYOR! Eger alirsak modelimizin bundan kotu bir sekilde etkilenebilir(Tum bu islemler bazi
+ML Algoritmalari icin gecerli degildir).
+Ornegin;
+Veri setimizde Cinsiyet Column'u var ve E ve K degerlerinden olusuyor. Biz bu Column'u Dummy Variable seklinde 2 sutun olusturdugumuzu varsayalim.
+E bir sutun K bir sutun. Kiside Erkek ise E'nin index'i 1 Kadin ise K'nin index'i 1. Aksi halde 0 yaziyor.
+Cinsiyet	Erkek	Kadin
+E		1	0
+K		0	1
+K		0	1
+E		1	0
+K		0	1
+gibi.
+
+Bu Dummy Variable olusturduktan sonra Cinsiyet Column'unu ve E veya K Column'larindan bir tanesini Veri Setimizden Cikarmaliyiz. Sadece;
+
+Kadin
+0
+1
+1
+0
+1
+olmali.
+Orijinal Column'u yani Cinsiyet Column'unu atip Dummy Variablerin hepsini alirsak; Yine birbirinin ayni degerlerini ifade eden birinin 1 dedigine digeri 0
+diyen 2 tane Column olur. Bu Column'lar birbirine bagli olarak degismektedir. Sistemi etkileyebilir.
+
+Baska bir Ornek verecek olursak;
+Ornegin Sehir isimleri var ve bu Column'da 10 tane farkli sehir ismi var. O zaman butun Sehir isimlerini ayri ayri Dummy Variable olarak olusturup
+Veri Setimize ekleyebiliriz. Cunku birinin Istanbul'lu degilse nereli oldugunun cikarimini yapamiyoruz.
+
+
+[Baslik] -> P(Probility) Value(Olasilik Degeri):
+
+- H0: null hypothesis = Farksizlik Hipotezi, sifir hipotezi, bos hipotez isimlerini alir. Ornek vermek gerekirse; Temelde kabul ettigimiz hipotezler buna
+ornektir. Mesela, kutuda en az 10 kurabiye var, ne kadar cok ders calisirsan o kadar basarili olursun vb.
+
+- H1 = Alternatif Hipotez. H0'a terstir. Ornek vermek gerekirse; Ders calismaya harcanan sure arttikca basari her zaman artmaz, Her kutuya 10 kurabiye
+koyulmadigi durumlar vardir vb.
+
+- p-degeri = olasilik degeri(genelde 0.05) alinir
+
+p-degeri kuculdukce H0 hatali olma ihtimali artar.
+p-degeri buyudukce H1 hatali olma ihtimali artar.
+
+Bir ornek verelim;
+1 milyon data'si olan bir veri setimiz olsun. Icindek 250 binlik Orneklem verisini secelim ve p degeride 0.05 yani 250 binin %5'i = 12.500.
+Bizim hipotezimiz de kutulardan en az 100 tane icecek cikacak olsun. Eger 100 taneden daha az icecek cikan kutu sayisi %5'den az olursa H0 yani hipotezin
+yanlis cikma ihtimalini azaltir. Yani H1 hipotezinin dogru cikma olasiligi artar. %5'den fazla cikarsa da H0'i destekler. Hipotez yanlis cikmis olur.
+
+
+[Baslik] -> Cok Degiskenli Modellerde Degisken Secimi:
+
+	Bazi Feature'lar modelimizi iyi yonde etkilerken, basarisini arttirirken bazilari dusurebilir, hatta bazilari hic etki etmeyebilir. Bu yuzden
+Feature'larimizi da dogru olarak secip modele vermeliyiz. Bu isi de yaklamsimlarla saglayabiliriz.
+
+Farkli Yaklasimlar;
+- Butun Degiskenleri Dahil Etmek
+
+- Geriye Dogru Eleme(Backward Elimination)	|
+						|
+- Ileri Secim(Forward Selection)		| -> Bu 3 grup Adim Adim Karsilastirmadir(StepWise). Belirli adimlarda belirli Feature'lari eleyen yaklasimlar.
+						|
+- Iki Yonlu Eleme(Bidirectional Elimination)	|
+
+- Skor Karsilastirmasi(Score Comparison): Deneme yanilma ile kimin poz. kimin neg. etki edecegini bulabilecegimiz bir yaklasim cesitidir.
+
+
+- Backward Elimination; en yuksek p degeri silinir.
+
+- Forward Elimination; en dusuk p degeri silinir.
+
+
+Multiple Linear Regression -> Linear Regression
+Simple Linear Regression -> Linear Regression
+olarak programlama dillerinde ve literaturde gecmektedir.
+
+
+
+**************************Polynomial Regression(Polinominal Regresyon)********************************
+
+Simple Linear Reg -> y = A + B*X + E
+
+Multiple Linear Reg -> y = B0 + B1*X1 + B2*X2 + B3*X3 + ....... + Bn*Xn + E
+
+Polynomial Reg -> y = B0 + B1*X^1 + B2*X^2 + B3*X^3 + ....... + Bn*X^n + E    ->   Tek bagimsiz degisken icin formul
+
+Polynominal Reg -> y = B0 + B1*X1 + B2*X2 + B1.1*X1^2 + B2.2*X2^2 + B1.2*X1*X2 + E    ->   Birden fazla bagimsiz degisken icin formul
+
+Polynomial Regression'lar ussel yani polinomsal olarak artmaktadir. x^2, x^3 gibi.
+Linear Regression'la cozumledigimiz verilerin grafigine bir dogru cizebiliriz ancak Polinomial Regression'la cozumledigimiz verilerin grafigine dogru cizmek
+pek dogru olmayabilir. Dogru yerine bir egim cizmek daha mantikli olabilir.
+	Istatistikte, polinom regresyonu, bagimsiz degisken x ve bagimli degisken y arasindaki iliskinin x'te n'inci derece polinomu olarak modellendigi bir
+regresyon analizi bicimidir.
+
+
+*********************Support Vector Regression(Destek Vektor Regresyon) SVR***************************
+
+Dogrusal olarak birbirinden ayrilabilecek 2 tane sinifi birbirinden ayirmak icin bulunmustur.
+
+SVM; Classification veya Regression problemleri icin kullanilabilen Denetimli bir ML Algoritmasidir. Bununla birlikte daha cok Classification problemlerinde
+kullanilmaktadir.
+Bu algoritmada, her bir veri maddesini belirli bir koordinatin degeri olan her ozelligin degeri ile birlikte n-boyutlu bosluga(burada n sahip oldugumuz
+ozellik sayisi) bir nokta olarak cizilir. Ardindan, iki siniftan oldukca iyi ayrim yapan hiper-duzlemi bularak siniflandirma gerceklestirilir.
+
+SVM'ler sadece gozlemin koordinatlaridir.
+
+***Veriler etiketlendirilmediginde Denetimli Ogrenme(Supervised Learning) mumkun degildir.
+
+
+***********************************Decision Tree(Karar Agaci)**************************************
+
+Decision Tree; bir kurum veya kurulus tarafindan tercihlerin, risklerin, kazanclarin ve hedeflerin anlasilmasina yardimci olan bir teknik urunudur.
+Genelde Classification icin kullanilir.
+Decision Tree, En basit tanimi ile, olasi sonuc icin olusturulabilecek karar yollarinin olusturulmasidir. Elimizdeki Data Set'ten bir Feature(Column) secip
+onun diger Feature'lar uzerindeki dallanmalarini iliskilendirip bir karar agaci cikartiriz.
+
+Decision Tree's akis semalarina benzeyen yapilardir. Her bir nitelik bir dugum tarafindan temsil edilir.
+Dallar ve yapraklar agac yapisinin elemanlaridir. En son yapi yaprak, en ust yapi kok, aradakilerde dal olarak isimlendirilir.
+
+Decision Tree'ler hem siniflandirma hem de regresyon problemlerine uygulanmasindan oturu populer ML Algoritmalarindandir. Fakat geleneksel yontemlerden biri
+olan Decision Tree, en buyuk dezavantajlarindan biri Overfitting'dir(asiri ogrenme-veriyi ezberleme).
+
+
+******************************************Random Forest(Rassal Agaclar)**********************************
+
+ML Algoritmalarinda populer bir yere sahiptir, basari orani yuksektir ve oldukca iyi calisir.
+
+Random Forest, birden fazla Decision Tree'nin ayni problem icin, ayni veri seti uzerinde cizilmesi ve daha sonra problemin cozumunde hep birlikte kullanilmasi
+uzerine dayanir.
+Random Forest, Classtering, Regression ve diger gorevler icin egitim asamasinda cok sayida Decision Tree olusturarak problemin tipine gore sinif veya sayi
+tahmini yapan bir toplu ogrenme yontemidir.
+
+Random Forest, Decision Tree'leri kullaniyor. Decision Tree'de yer alan Overfitting'i de hem veri setinden hem de oznitelik setinden rassal olarak 10'larca
+100'lerce farkli alt setler seciyor ve bunlari egitiyor. Bu yontemle 100'lerce Decision Tree olusuyor ve her bir Decision Tree bir tahminde bulunuyor.
+
+Random Forest'in bir diger ozelligi de bize ozniteliklerin ne kadar onemli old. vermesidir. (Bir ozniteligin onemli olmasi demek o ozniteligin bagimli
+degiskendeki varyansin aciklanmasina ne kadar katki yaptigiyla alakali.)
+Random Forest Algoritmasina x sayida oznitelik verip en faydali y tanesini secmesini isteyebiliriz ve istersek bu bilgiyi baska bir modelde de kullanabiliriz.
+
+******Ensemble Learning(Kollektif Ogrenme)******
+	Birden fazla Classtering veya birden fazla Regression Algoritmasi ayni anda kullanilarak daha basarili sonuc cikartilabilir. Ornegin;
+elimizdeki algoritmalarin hata oranlarina baktik. Birisi %10 digeri %20. Bunlari birlikte kullanarak hatayi %5'e indirmemiz mumkun. Buna Ensemble Learning
+denir. Classtering icin de Regression icin de kullanilabilir.
+
+Random Forest'da bir Ensemble Learning yontemlerinden biridir.
+
+Yani amacimiz; veri kumesini birden fazla alt parcaya bolup, her parcadan farkli bir Decision Tree olusturmak. Sonrasinda da Decision Tree'lerin sonuclarini
+birlestirmek.
+
+Random Forest, daha az veriyle daha az basarili olmaz mi?
+- Bunun sebebi Karar Agaclarinda verinin artmasi durumunda basarinin dusmesi ile ilgili bir bulgu var. Yani bazi durumlarda veri arttigi zaman karar agacina
+bir kac tane etkisi olur. Bunlar;
+- Sonuclarin yanlis cikmasi etki edebilir. Cunku Decision Tree'lerde dallanma Overfitting'e gidebilir.
+- Daha buyuk Tree'ler olusur ve hesaplama zamani uzayabilir.
+
+
+*********************************************************Compare Of Predict Algorithms**************************************************
+
+**********************Evaluation Of Predictions(Tahmin Algoritmalarinin Degerlendirilmesi)*************************
+
+***********R-Square(R-Kare) Method*************
+
+Literaturde sik kullanilan bir yontemdir. 
+R-Square 2 tane deger uzerine kuruludur. Bunlar;
+
+1- Hata Kareleri Toplami: Sum(actual_value - predict_value)^2    Topla(gercek_deger - tahmin_deger)'in karesi
+
+2- Ortalama Farklarin Toplami: Sum(actual_value - predict_value_mean)^2    Topla(gercek_deger - tahmin_degerlerinin_ortalamasi)'nin karesi
+
+-> R^2 = 1 - (Hata Kareleri Toplami) / (Ortalama Farklarin Toplami)
+
+R^2;
+0'a esitse cok kotu bir algoritma bulmusuz demektir. -1 cikiyorsa tebrikler Dunyanin en kotu algoritmasi, burayi lutfen terkedin :)
+Ancak R^2 1'e esit veya 1'e ne kadar yakinsa o kadar iyi bir algoritma bulmusuz demektir. Buda Hata Kareleri Toplaminin, Ortalama Farklarinin Toplamindan 
+ne kadar kucuk olursa o kadar iyi bir algoritmaya isaret eder.
+
+
+*****Adjusted R-Square(Duzeltilmis R-Kare) Method******
+
+Amaclarimizdan birisi de R-Square degerini arttirmak. Ancak R-Square degerini her zaman arttirmak mumkun olmayabiliyor. Hatta R-Square bizim yaptigimiz olumlu
+calismalari maskeleyebiliyor, gormemizi engelleyebiliyor. Aslinda yaptigimiz islemler sistemi olumlu etkiliyor. R-Square uzerinde bu olumlu katkiyi
+goremeyebiliyoruz. Bize negatif anlamda etki yapabiliyor. Modelimizin ne kadar gelistigini gormemizi engelleyebiliyor.
+
+Adjusted R^2 = 1 - (1 - R^2)
+
+Bu yontemin de bazi dezavantajlari vardir.
+
+****************************************************Predict Algorithms Artilari ve Eksileri*******************************************
+
+		Model					Artilari						Eksileri
+
+	  Linear Regression		Veri Boyutundan bagimsiz olarak dogrusal		Dogrusallik kabulu ayni zamanda hatadir.
+					iliski uzerine kuruludur.
+
+
+	 Polynomial Regression		Dogrusal olmayan problemleri adresler.			Basari icin dogru polinom derecesi onemlidir.
+
+
+					Dogrusal olmayan modellerde calisir,			Olcekleme onemlidir, anlasilmasi nispeten karisiktir,
+		 SVR			marjinal degerlere karsi olcekleme ile			dogru kernel fonksiyonu secimi onemlidir.
+					dayanikli olur.
+
+
+       					Anlasilabilirdir, olceklemeye ihtiyac			Sonuclar sabitlenmistir, kucuk veri kumelerinde ezberleme
+        Decision Tree Regression	duymaz, dogrusal veya dogrusal olmayan			olmasi yuksek ihtimaldir.
+					problemlerde calisir.
+
+
+	    				Olceklemeye ihtiyac duymaz, dogrusal veya		Ciktilarin yorumu ve gorsellestirilmesi nispeten zordur.
+	    Random Forest		dogrusal olmayan problemlerde calisir,
+					ezber ve sabit sonuc riski dusuktur.
+
+- Problem icin hangi model daha uygundur?
+
+Bunun 2 icin 2 kritere bakmak gerekir.
+1. Verilerin incelenmesi(dogrusal mi? degisken sayisi?)
+2. Problemin incelenmesi

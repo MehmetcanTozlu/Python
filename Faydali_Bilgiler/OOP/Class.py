@@ -23,7 +23,7 @@ Bir Class'tan istedigimiz kadar object uretebiliriz.
 """
 
 
-class excampleClass(object):
+class ExampleClass(object):
 
     # class attributes
     tur = 'Homo Sapiens'
@@ -64,5 +64,5 @@ class excampleClass(object):
                 \nOkudugu Bolum: {bolumu}\nOkulu: {okulu}'
 
 
-excClass = excampleClass('Mehmetcan', 'Tozlu', 182, 82)
+excClass = ExampleClass('Mehmetcan', 'Tozlu', 182, 82)
 print(excClass.createPerson('Yazilim Muhendisligi', 'Firat Universitesi'))

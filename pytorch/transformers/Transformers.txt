@@ -1,0 +1,241 @@
+*************************************************************************** Transformers ********************************************************************
+
+	Transformers mimarilerinden once RNN gibi modeller cok populerdi Bunun sebebi hidden state(geri besleme/onceki durum) sahip olmalariydi.
+Hidden State; bir hucrenin output'u diger hucrenin input'u(ilk hucre haric) olarak kullanilmasi. Boylece modelin hafizasi olusur.
+
+	Encoder'in dezavantaji;
+
+	Encoder		 		Decoder
+	 RNN		 |--------------->RNN
+	 RNN		State		  RNN
+	 RNN		 ^		  RNN
+	 RNN-------------|		  RNN
+
+			Sekil-1
+
+Buradaki Encoder'in cikisinda dar bogazin olusmasi, Encoder-Decoder Modelinin dezavantajidir.
+
+	Buradaki darbogaz'i cozmek icin Attenion Mechanism(Dikkat Mekanizmasi) gelistirildi. Bu Attention Mechanism, Decoder'in Encoder'da ki butun State'lere
+ulasmasini sagladi.
+
+	Encoder				Decoder
+	 RNN------State 1-----|           RNN
+	 RNN------State 2-----|           RNN
+	 RNN------State 3---------------->RNN
+	 RNN------State 4-----^		  RNN
+				ATTENTION
+
+			Sekil-2
+
+	Sekilde de old. gibi, Decoder'da ki RNN, Encoder'da ki tum State'lere ulasiyor.
+
+
+Attention Mechanism'e biraz daha detaylica bakalim;
+
+	Sekil-1'de ki gibi Encoder sonundaki Hidden State'i Decoder'a veriyordu. Attention Mechanism'de Encoder, her bir adim icin bir Hidden State uretir.
+Ancak, ayni zaman adimindaki tum Hidden State'ler Decoder icin buyuk bir girdi olusturabilir. Bu yuzden hangi State'lerin daha onemli old. belirlenmesi gerekir.
+Iste burada Attention Mechanism devreye giriyor. Bu mekanizma, her bir state icin farkli buyuklukte bir deger atama yapar.
+	Ancak Attention Mechanism, hesaplama yaparken sirasiyla, seri bir bicimde hesaplama yapıyor. Ornegin, modele dizi veriyoruz ve cikti olarak dizi aliyoruz.
+Attention, bu dizideki kelimeler tek tek isleniyor. Bu isleme sirasinda hesaplamalar sirasiyla, seri bir bicimde yapiliyor. Yani bir islem yapiliyor, o bitiyor,
+daha sonra diger islem yapiliyor, o bitiyor.... Bu islemler paralel sekilde yapilamiyor. Bu problemi cozmek icin, TRANSFORMER Mimarisi gelistirildi.
+
+	Transformer Mimarisi, Attention yerine Self Attention yaklasimini kullandi.
+
+Self Attention:
+	Attention, ANN'in her bir katmanindaki her bir noronun state'leri ile calisiyordu. Self Attention ise, ayni katmanda bulunan butun birimlerdeki state'ler
+uzerinde calisiyor. Transformer Mimarisinde, hem Encoder'in hem de Decoder'in kendi Self Attention Mekanizmalari vardir.
+	
+	Bu mekanizmalarda RNN'lerin kullanildigi Tekrarli Sinir Aglari yerine Ileri Beslemeli Sinir Aglari kullanildi. Bu mimari RNN Modellerinden daha hizli
+egitildi. Bu teknik Fatih'in Istanbul'u feth etmesi gibi cag acti, cag kapatti.
+
+
+	Bu mimari kullanilarak, NLP'de bir cok model gelistirildi. Orijinal Transformer Mimarisi, buyuk miktarda veriyle cok guclu pc'ler kullanilarak 0'dan
+egitildi. Fakat bircok NLP uyg. icin etiketli(label) veri bulmak cok zordur. Ayrica bu modelleri egitmek icin guclu pc'ler gerekir.
+Iste bu sorunlari cozmek icin; TRANSFER LEARNING yaklasimi gelistirildi.
+
+
+Transfer Learning:
+	Daha onceden egitilmis bir modeli alip, onu kendi projemize adapte etmemizdir.
+
+Fine Tune terimi, egitilmis bir modelin hyperparameter'leri ile oynamak olarak dusunebiliriz.
+
+***** Transfer Learning kullanilarak insa edilen modeller, 0'dan egitilen modellere gore daha iyi performans gosterdi. *****
+
+
+Bu Transfer Learning teknigi, Computer Vision icin harikulade sonuclar verirken, NLP icin cokta iyi sonuclar vermedi. 2017 yilinda, Transfer Learning NLP icinde
+ kullanilabilir hâle geldi. Bu, Denetimsiz On Isleme ile elde edilen, Feature'lar kullanarak yapildi. Bu teknigi uygulamak icin "ULMFIT"  kutuphanesi
+gelistirildi.
+
+
+ULMFIT Kutuphanesi; Transfer Learning'i 3 asama ile uyguladi. Bunlar:
+
+1. Pretraining -> bu adimda gelecek kelimenin tahmini onceki kelimelere dayanarak yapildi. Bu isleme "Dil Modelleme" denildi.
+		  Bu yaklasimda etiketli veriye ihtiyac duyulmadi. Boylece internetteki kaynaklardan orn. Wikipedia, bolca yararlanildi.
+
+2. Domain Adaptasyonu -> dil modeli buyuk bir corpus uzerinde egitildikten sonra spesifik bir Domain'e Adapte edilir.
+			 Ornegin, modeli Wikipedia uzerinde egittik. Bu modeli IMDB corpusuna adapte edebiliriz. Bu asamada Dil Modellemeyi kullanir.
+			 Fakat model, hedef corpus'da ki gelecek kelimeleri tahmin eder.
+
+3. Fine Tuning -> dil modeli, bir gorev icin siniflandirma katmaniyla Fine Tune edilir.
+
+
+	2018'de, Transfer Learning ile Self Attention'u birlestiren GPT ve BERT modelleri gelistirildi.
+GPT, Transformer Mimarisinin Decoder blogunu kullanirken(book corpus ile egitildi, cesitli turlerdeki 7k kitap uzerinde egitildi),
+BERT, Transformer Mimarisinin Encoder blogunu kullandi(bert=maskelenmis dil modeli, book corpus ve ing Wikipedia uzerinde egitildi).
+
+BERT ve GPT ile NLP'de yeni bir Transformer cagi basladi.
+
+***
+Hugging Face tarafindan gelistirilen Transformers Kutuphanesi ile LLM(Large Language Model) icin bir standart gelistirildi.
+Bu kutuphane;
+- PyTorch
+- Tensorflow
+- JAX
+framework'lerini desteklemektedir.
+
+Ayrica Transformers, goreve ozgu mimarilerde sundu.
+
+Transformers
+|
+|---> Text Classification
+|---> Question Answering
+|---> Language Modeling
+|---> Translation
+|---> Text Generation
+|---> Entity Recognition
+|---> Text Summarization
+
+Bu tarz projeleri kendimize uygun hale getirmek icin, bu mimarilerin bas tarafini Fine Tune etmemiz yeterli.
+***
+
+
+	AI alanindaki "transformers" terimi, ozellikle NLP ve DL modelleri icin kullanilan bir tur model mimarisini ifade eder. Bu, ozellikle buyuk modellerle,
+buyuk veri setlerini isleme veya anlama yetenegini arttiran bir yaklasimi temsil eder.
+
+	Transformer, "Attention is All You Need" baslikli bir makalede tanitilan bir modeldir. Geleneksel Recurrent ve Convolutional modellerin yerine kullanilan,
+ozellikle uzun menzilli baglantilari daha etkili bir sekilde ele alabilen bir mimari sunar.
+
+
+Transformers Nedir?
+
+1. Model Mimarisi:
+
+- Attention Mechanism(Dikkat Mekanizmasi):
+	Transformers'in temelinde dikkat mekanizmasi yatar. Bu mekanizma, bir kelimenin onemini belirlemek icin diger kelimelere odaklanma yetenegini saglar.
+	Attention Mechanism'ler input veya output dizilerindeki mesafelerine bakilmaksizin bagimliliklarin modellenmesine izin vererek cesitli gorevlerde
+	zorlayici dizi modelleme ve aktarim modellerinin ayrilmaz bir parcasi haline gelmistir.
+	Ancak birkac ornek disinda, bu tur dikkat mekanizmalari Recurrent(tekrarlayan) bir ag ile birlikte kullanilmaktadir.
+	*** Bir Attention Function'u, bir sorguyu ve bir dizi key-value ciftini bir output'a eslemek olarak tanimlanabilir; burada sorgu, key'ler, value'ler ve
+	ciktinin tumu vektordur. Cikti, agirlikli bir toplam olarak hesaplanir. ***
+	Attention Mechanism, giris sirasinda farkli konumlari agirlikli olarak dikkate alıp ciktiyi olusturur.
+	Temel yapi taslari K(Key), V(Value), Q(Query) matrix'leridir. Bu 3 matrix, attention agirliklarini olusturmak icin birbirleriyle isbirligi yaparlar.
+	a. Query(Q):
+		Query Matrix'i, attention(dikkat) agirliklarini hesaplamak icin kullanilan sorgu matrix'idir. Her bir query, genellikle giris verilerinin
+		ogrenilen bir temsilidir.
+	b. Value(V):
+		Value Matrix'i, attention agirliklariyla carpildiginda elde edilen ciktiyi temsil eder. Her bir deger, giris verilerinin ogrenilen bir temsilidir.
+	c. Key(K):
+		Key Matrix'i, attention mechanism'in attention(dikkat) odaklarini belirlemede kullanilir. Her bir key, giris verilerinin ogrenilen bir temsilidir.
+		
+	Formül =>    Attention(Q, K, V) = softmax( QK^T / (dk^½(kök içinde dk))) * V
+			dk -> K ve Q matrix'lerinin boyutunu temsil eder ve dk^½ ile normallestirme yapilarak attention agirliklari hesaplanir.
+	Bu sekilde, Attention Mechanism, Q ve K matrix'lerinin ic carpimini kullanarak farkli pozisyonlara agirlik verir ve bu agirliklari kullanarak Value
+	matrix'inden bir cikti olusturur.
+	Bu, ozellikle language model'leri ve diger sirali veri isleme gorevlerinde uzun menzilli baglantilari daha etkili bir sekilde ele almak icin kullanilir.
+		
+
+- Moduler ve Paralel Isleme:
+	Transformers moduler bir yapiya sahiptir ve paralel isleme yapabilir. Bu, ozellikle buyuk veri setlerini ve modelleri islerken hizli egitim ve
+	tahmin saglar.
+
+
+2. Dil Modeli:
+
+- BERT(Bidirectional Encoder Representations from Transformers):
+	Onceki dil modellerinden farkli olarak, BERT iki yonlu bir kodlayici kullanir. Bu, bir kelimenin anlamini diger kelimelerle iliskilendirirken baglami
+	dikkate almasina olanak tanir.
+	Google tarafindan gelistirilen BERT, bicimlendirilmemis bir dil modelinin onceden egitimi sirasinda iki yonlu bir attention kullanir. Bu bir kelimenin
+	baglamini daha iyi anlamalarini saglar.
+
+- GPT(Generative Pre-trained Transformer):
+	OpenAI tarafindan gelistirilen GPT serisi, buyuk olcekli veri setleri uzerinde onceden egitilmis ve ardindan cesitli gorevlerde ayarlanabilen bir dil
+	modelini temsil eder.
+
+
+3. Cesitli Uygulamalar:
+
+- Metin Siniflandirma:
+	Film incelemelerini veya haber basliklarini siniflandirmak gibi.
+
+- Ceviri Modelleri:
+	Dil cevirisi icin kullanilabilir.
+
+- Konusma Tanima:
+	Sesli komutlari anlamak ve islemek icin kullanilabilir.
+
+- Ozetleme:
+	Metinlerden ozetler olusturmak icin kullanilabilir.
+
+
+
+Neden Transformers?
+
+1. Attention Mechanism(Dikkat Mekanizmasi):
+	Onceki modeller, bir kelimenin anlamini belirlerken genellikle belirli bir sirayi takip ederdi. Ancak "Attention Mechanisim", bir kelimenin anlamini
+	belirlerken diger kelimelere odaklanma yetenegi getirdi.
+
+2. Moduler ve Paralel Isleme:
+	Transformers, paralel isleme yetenekleri ve moduler yapisi sayesinde buyuk veri setlerini daha hizli isleyebilir.
+
+3. Transfer Ogrenme:
+	 Buyuk modeller, genellikle bir gorevde egitildikten sonra diger gorevlerde de kullanilabilir.
+
+4. Basari Elde Edilen Gorevler:
+	Transformers mimarisi, ozellikle nlp gorevlerinde cok basarili sonuclar elde etti. BERT gibi modeller, bircok NLP gorevinde SOTA(State of the ART)
+	sonuclar elde etmistir.
+
+5. Cesitli Gorevlere Uygun:
+	Ayni model mimarisi, farkli gorevlerde(siniflandirma, ceviri, ozetleme) kullanilabilecek bir temel saglar.
+
+
+
+	Geleneksel olarak, dil modelleri ve diger gorevler icin Recurrent Neural Network(RNN) veya Convolution Neural Network(CNN) kullanilmaktaydi.
+Ancak, bu modeller zaman icinde uzun menzilli baglantilari etkili bir sekilde ogrenme konusunda sinirlamalara sahiptir.
+
+	Transformer mimarisi, sadece Natural Language Processing(NLP) ile sinirli degildir. Gelistirilen bircok model, Image Processing, Video Analysis ve diger
+alanlarda da basariyla kullanilmaktadir.
+
+	Transformers, ozellikle LLM basarisini artirmak ve cesitli gorevlerde kullanimi kolaylastirmak icin benzersiz bir etki saglamistir.
+
+
+*****
+Encoder - Decoder mimarilerinde yaygin olarak kullanilan Recurrent(tekrarlayan) katmanlari, Multi Head Self Attention(Cok Basli Oz Dikkat) ile degistirilerek,
+tamamen Attention(Dikkat) dayali ilk dizi donusturme modeli olan Transformers tanitildi.
+Attention Is All You Need Makalesi
+*****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
